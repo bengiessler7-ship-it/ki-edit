@@ -1,0 +1,1 @@
+export default function RightsCheckbox({value,onChange}:{value:boolean;onChange:(v:boolean)=>void}){return <label className='card block'><input type='checkbox' checked={value} onChange={e=>onChange(e.target.checked)} className='mr-2'/>Ich besitze die Rechte an diesem Video oder habe die Erlaubnis, es zu bearbeiten.</label>}

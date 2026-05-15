@@ -1,0 +1,1 @@
+export function PhoneMockup(){return <div className="w-48 h-96 rounded-3xl border border-neon/60 bg-gradient-to-b from-white/10 to-black/60 p-3"><div className="h-full rounded-2xl bg-black/70 flex items-center justify-center text-xs">Preview</div></div>}

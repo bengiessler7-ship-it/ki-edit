@@ -1,0 +1,1 @@
+export default function LinkInput({value,onChange}:{value:string;onChange:(v:string)=>void}){return <div className='card'><label>Video-Link (YouTube/ZTube/MP4)<input className='w-full mt-2 bg-black/40 p-2 rounded' value={value} onChange={e=>onChange(e.target.value)} /></label></div>}

@@ -1,0 +1,2 @@
+import { EnhancementOptions } from '@/lib/types';
+export default function EnhancementOptionsComp({value,onChange}:{value:EnhancementOptions;onChange:(v:EnhancementOptions)=>void}){const t=(k:keyof EnhancementOptions)=>onChange({...value,[k]:!value[k]});return <div className='card'><p className='font-semibold mb-2'>Browser-Optimierung</p>{(Object.keys(value) as (keyof EnhancementOptions)[]).map(k=><label key={k} className='block'><input type='checkbox' checked={value[k]} onChange={()=>t(k)} className='mr-2'/>{k}</label>)}</div>}

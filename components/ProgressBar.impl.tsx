@@ -1,0 +1,1 @@
+export default function ProgressBar({progress}:{progress:number}){return <div className='card'><div className='h-3 bg-white/10 rounded'><div className='h-3 bg-neon rounded' style={{width:`${progress}%`}}/></div><p className='mt-2'>{progress}%</p></div>}
