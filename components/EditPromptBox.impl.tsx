@@ -1,0 +1,1 @@
+export default function EditPromptBox({value,onChange}:{value:string;onChange:(v:string)=>void}){return <textarea className='card w-full min-h-28' placeholder='Beschreibe deinen Edit, z.B. schneller Phonk-Fußball-Edit mit Zooms, Shakes, Flash-Transitions, GOAL-Texten und Beat-Sync.' value={value} onChange={e=>onChange(e.target.value)} />}

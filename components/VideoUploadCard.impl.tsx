@@ -1,0 +1,1 @@
+export default function VideoUploadCard({onChange}:{onChange:(f:File|null)=>void}){return <div className='card'><label>Video hochladen<input type='file' accept='video/*' className='block mt-2' onChange={e=>onChange(e.target.files?.[0]??null)}/></label><p className='text-xs text-white/60 mt-2'>Bitte verwende nur Videos, an denen du die Rechte hast.</p></div>}

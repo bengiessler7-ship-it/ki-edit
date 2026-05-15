@@ -1,0 +1,1 @@
+export default function MusicUploadCard({onChange}:{onChange:(f:File|null)=>void}){return <div className='card'><label>Musik hochladen (optional)<input type='file' accept='.mp3,.wav,.m4a,audio/*' className='block mt-2' onChange={e=>onChange(e.target.files?.[0]??null)}/></label></div>}
