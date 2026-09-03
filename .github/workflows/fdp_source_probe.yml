@@ -1,30 +1,26 @@
-name: FDP people source probe
+name: FDP Kubicki press asset
 on:
   push:
     branches: [fdp-render-20260903]
     paths:
       - '.github/workflows/fdp_source_probe.yml'
-      - 'cloud_render/commons_people_probe.py'
+      - 'cloud_render/kubicki_press_probe.py'
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Install tools
+      - name: Download current official FDP Kubicki press photo
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg python3-pil
-          python3 -m pip install --disable-pip-version-check -q requests pillow
-      - name: Download new FDP people footage and current brand package
-        run: python3 cloud_render/commons_people_probe.py
-      - name: Upload people probe artifact
-        if: always()
+          python3 -m pip install --disable-pip-version-check -q requests
+          python3 cloud_render/kubicki_press_probe.py
+      - name: Upload Kubicki asset
         uses: actions/upload-artifact@v4
         with:
-          name: fdp-people-probe
-          path: people_probe
+          name: kubicki-press-2026
+          path: kubicki_press
           retention-days: 2
