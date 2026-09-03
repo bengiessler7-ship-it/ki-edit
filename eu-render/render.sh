@@ -77,7 +77,10 @@ make_segment() {
       -frames:v "$frames" -c:v libx264 -preset veryfast -crf 18 -pix_fmt yuv420p -movflags +faststart "$out"
   fi
 
-  [[ -n "$tmp" ]] && rm -f "$tmp"
+  if [[ -n "$tmp" ]]; then
+    rm -f "$tmp"
+  fi
+  return 0
 }
 
 for i in $(seq 1 25); do
