@@ -51,7 +51,6 @@ make_segment() {
   out=$(printf "segments/%02d.mp4" "$n")
   source="$url"
 
-  # Pexels page-style download URLs are downloaded first; direct videos can be streamed.
   if [[ "$url" == *"pexels.com/download/video/"* ]]; then
     tmp=$(printf "segments/source_%02d.mp4" "$n")
     echo "Downloading real-footage source $n"
@@ -66,10 +65,17 @@ make_segment() {
     grade="eq=contrast=1.11:brightness=0.035:saturation=1.18:gamma=1.02,colorbalance=rs=.022:bs=.008"
   fi
 
-  ffmpeg -y -hide_banner -loglevel warning \
-    -rw_timeout 60000000 -user_agent "$UA" -ss "$ss" -i "$source" \
-    -an -vf "scale=1080:1080:force_original_aspect_ratio=increase:flags=lanczos,crop=1080:1080,fps=30,$grade,unsharp=5:5:0.30:5:5:0.0,format=yuv420p" \
-    -frames:v "$frames" -c:v libx264 -preset veryfast -crf 18 -pix_fmt yuv420p -movflags +faststart "$out"
+  if [[ -n "$tmp" ]]; then
+    ffmpeg -y -hide_banner -loglevel warning \
+      -ss "$ss" -i "$source" \
+      -an -vf "scale=1080:1080:force_original_aspect_ratio=increase:flags=lanczos,crop=1080:1080,fps=30,$grade,unsharp=5:5:0.30:5:5:0.0,format=yuv420p" \
+      -frames:v "$frames" -c:v libx264 -preset veryfast -crf 18 -pix_fmt yuv420p -movflags +faststart "$out"
+  else
+    ffmpeg -y -hide_banner -loglevel warning \
+      -rw_timeout 60000000 -user_agent "$UA" -ss "$ss" -i "$source" \
+      -an -vf "scale=1080:1080:force_original_aspect_ratio=increase:flags=lanczos,crop=1080:1080,fps=30,$grade,unsharp=5:5:0.30:5:5:0.0,format=yuv420p" \
+      -frames:v "$frames" -c:v libx264 -preset veryfast -crf 18 -pix_fmt yuv420p -movflags +faststart "$out"
+  fi
 
   [[ -n "$tmp" ]] && rm -f "$tmp"
 }
