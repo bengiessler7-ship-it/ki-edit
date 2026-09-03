@@ -65,7 +65,11 @@ for i in $(seq 1 25); do
     esac
     vf="scale=1240:1240:force_original_aspect_ratio=increase:flags=lanczos,crop=1080:1080:${pan},setpts=0.86*PTS,fps=30,eq=contrast=1.14:brightness=.035:saturation=1.22:gamma=1.02,colorbalance=rs=.025:bs=.006,unsharp=5:5:.42:5:5:0,format=yuv420p"
   fi
-  ffmpeg -y -hide_banner -loglevel warning -rw_timeout 60000000 -user_agent "$UA" -ss "${STARTS[$idx]}" -i "$src" -an -vf "$vf" -frames:v "${FRAMES[$idx]}" -c:v libx264 -preset veryfast -crf 17 -pix_fmt yuv420p "$out"
+  if [[ "$src" == assets/* ]]; then
+    ffmpeg -y -hide_banner -loglevel warning -ss "${STARTS[$idx]}" -i "$src" -an -vf "$vf" -frames:v "${FRAMES[$idx]}" -c:v libx264 -preset veryfast -crf 17 -pix_fmt yuv420p "$out"
+  else
+    ffmpeg -y -hide_banner -loglevel warning -rw_timeout 60000000 -user_agent "$UA" -ss "${STARTS[$idx]}" -i "$src" -an -vf "$vf" -frames:v "${FRAMES[$idx]}" -c:v libx264 -preset veryfast -crf 17 -pix_fmt yuv420p "$out"
+  fi
 done
 
 : > concat.txt
