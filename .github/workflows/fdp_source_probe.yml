@@ -1,17 +1,17 @@
-name: Kubicki broadcast probe
+name: Kubicki short sections
 on:
   push:
     branches: [fdp-render-20260903]
     paths:
       - '.github/workflows/fdp_source_probe.yml'
-      - 'cloud_render/kubicki_broadcast_probe.py'
+      - 'cloud_render/kubicki_zdf_sections.py'
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - name: Install media tools
@@ -19,12 +19,12 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg python3-pil
           python3 -m pip install --disable-pip-version-check -q yt-dlp pillow
-      - name: Download 2026 Kubicki broadcast footage and create contact sheets
-        run: python3 cloud_render/kubicki_broadcast_probe.py
-      - name: Upload broadcast probe artifact
+      - name: Download short Kubicki sections
+        run: python3 cloud_render/kubicki_zdf_sections.py
+      - name: Upload Kubicki sections
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: kubicki-broadcast-probe
-          path: kubicki_broadcast
+          name: kubicki-zdf-sections
+          path: kubicki_sections
           retention-days: 2
