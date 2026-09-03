@@ -4,7 +4,7 @@ on:
     branches: [fdp-render-20260903]
     paths:
       - '.github/workflows/fdp_source_probe.yml'
-      - 'cloud_render/source_probe.py'
+      - 'cloud_render/source_probe_v2.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,11 +19,12 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg python3-pil
           python3 -m pip install --disable-pip-version-check -q requests yt-dlp pillow
-      - name: Download legally traceable source material and make contact sheets
-        run: python3 cloud_render/source_probe.py
+      - name: Download new traceable FDP source material and make contact sheets
+        run: python3 cloud_render/source_probe_v2.py
       - name: Upload probe artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: fdp-source-probe
+          name: fdp-source-probe-v2
           path: cloud_probe
           retention-days: 2
