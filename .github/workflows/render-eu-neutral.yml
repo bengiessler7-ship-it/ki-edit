@@ -24,6 +24,7 @@ jobs:
       - name: Render V2 1080x1080 real-footage edit
         shell: bash
         run: |
+          mkdir -p eu-render-v2
           set +e
           bash -x eu-render/render_v2.sh 2>&1 | tee eu-render-v2/render-debug.log
           status=${PIPESTATUS[0]}
