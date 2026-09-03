@@ -1,0 +1,29 @@
+name: FDP source probe
+on:
+  push:
+    branches: [fdp-render-20260903]
+    paths:
+      - '.github/workflows/fdp_source_probe.yml'
+      - 'cloud_render/source_probe.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg python3-pil
+          python3 -m pip install --disable-pip-version-check -q requests yt-dlp pillow
+      - name: Download legally traceable source material and make contact sheets
+        run: python3 cloud_render/source_probe.py
+      - name: Upload probe artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fdp-source-probe
+          path: cloud_probe
+          retention-days: 2
