@@ -1,10 +1,10 @@
-name: FDP Kubicki press asset
+name: FDP Berlin asset
 on:
   push:
     branches: [fdp-render-20260903]
     paths:
       - '.github/workflows/fdp_source_probe.yml'
-      - 'cloud_render/kubicki_press_probe.py'
+      - 'cloud_render/berlin_asset.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -14,13 +14,13 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Download current official FDP Kubicki press photo
+      - name: Download vertical Berlin 2026 CC footage
         run: |
           python3 -m pip install --disable-pip-version-check -q requests
-          python3 cloud_render/kubicki_press_probe.py
-      - name: Upload Kubicki asset
+          python3 cloud_render/berlin_asset.py
+      - name: Upload Berlin asset
         uses: actions/upload-artifact@v4
         with:
-          name: kubicki-press-2026
-          path: kubicki_press
+          name: berlin-vertical-2026
+          path: berlin_asset
           retention-days: 2
