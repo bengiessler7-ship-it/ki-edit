@@ -21,26 +21,25 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ffmpeg
 
-      - name: Render 1080x1080 real-footage edit
+      - name: Render V2 1080x1080 real-footage edit
         shell: bash
         run: |
-          # Render revision: clean opening + MOGGED + official 2026 FDP logo motion.
           set +e
-          bash -x eu-render/render.sh 2>&1 | tee eu-render/render-debug.log
+          bash -x eu-render/render_v2.sh 2>&1 | tee eu-render-v2/render-debug.log
           status=${PIPESTATUS[0]}
-          echo "$status" > eu-render/render-exit-code.txt
+          echo "$status" > eu-render-v2/render-exit-code.txt
           exit "$status"
 
-      - name: Upload rendered video and diagnostics
+      - name: Upload rendered V2 and diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: eu-neutral-real-footage-video
+          name: eu-neutral-real-footage-video-v2
           path: |
-            eu-render/EU_REAL_FOOTAGE_NEUTRAL_VIDEO_ONLY.mp4
-            eu-render/render_probe.json
-            eu-render/SHA256SUMS.txt
-            eu-render/render-debug.log
-            eu-render/render-exit-code.txt
+            eu-render-v2/EU_EDIT_V2_VIDEO_ONLY.mp4
+            eu-render-v2/render_probe.json
+            eu-render-v2/SHA256SUMS.txt
+            eu-render-v2/render-debug.log
+            eu-render-v2/render-exit-code.txt
           if-no-files-found: warn
           retention-days: 1
