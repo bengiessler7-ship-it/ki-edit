@@ -1,17 +1,17 @@
-name: Kubicki clean video probe
+name: Kubicki broadcast probe
 on:
   push:
     branches: [fdp-render-20260903]
     paths:
       - '.github/workflows/fdp_source_probe.yml'
-      - 'cloud_render/kubicki_video_probe.py'
+      - 'cloud_render/kubicki_broadcast_probe.py'
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - name: Install media tools
@@ -19,12 +19,12 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg python3-pil
           python3 -m pip install --disable-pip-version-check -q yt-dlp pillow
-      - name: Probe clean official Kubicki footage
-        run: python3 cloud_render/kubicki_video_probe.py
-      - name: Upload probe artifact
+      - name: Download 2026 Kubicki broadcast footage and create contact sheets
+        run: python3 cloud_render/kubicki_broadcast_probe.py
+      - name: Upload broadcast probe artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: kubicki-clean-video-probe
-          path: kubicki_probe
+          name: kubicki-broadcast-probe
+          path: kubicki_broadcast
           retention-days: 2
