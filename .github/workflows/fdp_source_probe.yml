@@ -1,26 +1,30 @@
-name: FDP Berlin asset
+name: Kubicki clean video probe
 on:
   push:
     branches: [fdp-render-20260903]
     paths:
       - '.github/workflows/fdp_source_probe.yml'
-      - 'cloud_render/berlin_asset.py'
+      - 'cloud_render/kubicki_video_probe.py'
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
-      - name: Download vertical Berlin 2026 CC footage
+      - name: Install media tools
         run: |
-          python3 -m pip install --disable-pip-version-check -q requests
-          python3 cloud_render/berlin_asset.py
-      - name: Upload Berlin asset
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg python3-pil
+          python3 -m pip install --disable-pip-version-check -q yt-dlp pillow
+      - name: Probe clean official Kubicki footage
+        run: python3 cloud_render/kubicki_video_probe.py
+      - name: Upload probe artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: berlin-vertical-2026
-          path: berlin_asset
+          name: kubicki-clean-video-probe
+          path: kubicki_probe
           retention-days: 2
