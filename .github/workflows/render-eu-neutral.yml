@@ -24,6 +24,7 @@ jobs:
       - name: Render 1080x1080 real-footage edit
         shell: bash
         run: |
+          # Render revision: clean opening + MOGGED + official 2026 FDP logo motion.
           set +e
           bash -x eu-render/render.sh 2>&1 | tee eu-render/render-debug.log
           status=${PIPESTATUS[0]}
