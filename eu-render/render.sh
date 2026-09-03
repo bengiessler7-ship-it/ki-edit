@@ -82,10 +82,10 @@ FILTER="
   drawtext=fontfile=${FONT}:text='EUROPE':fontcolor=white:fontsize=100:borderw=5:bordercolor=0x102A56:shadowcolor=black@0.6:shadowx=5:shadowy=7:x=85:y=75:enable='between(t,6.933,7.333)',
   drawtext=fontfile=${FONT}:text='EUROPE':fontcolor=white:fontsize=72:borderw=4:bordercolor=0x102A56:shadowcolor=black@0.55:shadowx=4:shadowy=6:x=62:y=58:enable='between(t,7.333,8.933)',
   drawbox=x=0:y=0:w=iw:h=ih:color=white@0.42:t=fill:enable='between(t,10.133,10.167)',
-  drawtext=fontfile=${FONT}:text='EUROPE IN MOTION':fontcolor=0x101010:fontsize=105:box=1:boxcolor=white@0.96:boxborderw=28:borderw=3:bordercolor=0xFFFFFF:shadowcolor=black@0.55:shadowx=10:shadowy=12:x=(w-text_w)/2:y=(h-text_h)/2:enable='between(t,10.133,10.533)',
-  drawtext=fontfile=${FONT}:text='EUROPE IN MOTION':fontcolor=0x101010:fontsize=82:box=1:boxcolor=white@0.96:boxborderw=22:shadowcolor=black@0.50:shadowx=8:shadowy=10:x=95:y=110:enable='between(t,10.533,10.933)',
-  drawtext=fontfile=${FONT}:text='EUROPE IN MOTION':fontcolor=0x101010:fontsize=60:box=1:boxcolor=white@0.95:boxborderw=18:shadowcolor=black@0.48:shadowx=7:shadowy=8:x=70:y=78:enable='between(t,10.933,11.333)',
-  drawtext=fontfile=${FONT}:text='EUROPE IN MOTION':fontcolor=0x101010:fontsize=42:box=1:boxcolor=white@0.94:boxborderw=13:shadowcolor=black@0.45:shadowx=5:shadowy=6:x=45:y=48:enable='between(t,11.333,13.600)',
+  drawtext=fontfile=${FONT}:text='EUROPE IN MOTION':fontcolor=0x101010:fontsize=80:box=1:boxcolor=white@0.96:boxborderw=22:borderw=2:bordercolor=0xFFFFFF:shadowcolor=black@0.55:shadowx=9:shadowy=10:x=(w-text_w)/2:y=(h-text_h)/2:enable='between(t,10.133,10.533)',
+  drawtext=fontfile=${FONT}:text='EUROPE IN MOTION':fontcolor=0x101010:fontsize=66:box=1:boxcolor=white@0.96:boxborderw=18:shadowcolor=black@0.50:shadowx=7:shadowy=8:x=70:y=95:enable='between(t,10.533,10.933)',
+  drawtext=fontfile=${FONT}:text='EUROPE IN MOTION':fontcolor=0x101010:fontsize=52:box=1:boxcolor=white@0.95:boxborderw=15:shadowcolor=black@0.48:shadowx=6:shadowy=7:x=58:y=70:enable='between(t,10.933,11.333)',
+  drawtext=fontfile=${FONT}:text='EUROPE IN MOTION':fontcolor=0x101010:fontsize=36:box=1:boxcolor=white@0.94:boxborderw=11:shadowcolor=black@0.45:shadowx=4:shadowy=5:x=42:y=45:enable='between(t,11.333,13.600)',
   noise=alls=2.0:allf=t,
   format=yuv420p[v]
 "
