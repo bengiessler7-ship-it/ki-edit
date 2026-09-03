@@ -31,13 +31,15 @@ jobs:
           echo "$status" > eu-render-v2/render-exit-code.txt
           exit "$status"
 
-      - name: Upload rendered V2 and diagnostics
+      - name: Upload rendered V2, background, logo and diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: eu-neutral-real-footage-video-v2
           path: |
             eu-render-v2/EU_EDIT_V2_VIDEO_ONLY.mp4
+            eu-render-v2/background.mp4
+            eu-render-v2/assets/fdp.png
             eu-render-v2/render_probe.json
             eu-render-v2/SHA256SUMS.txt
             eu-render-v2/render-debug.log
