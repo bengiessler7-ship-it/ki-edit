@@ -22,9 +22,16 @@ jobs:
           sudo apt-get install -y ffmpeg
 
       - name: Render 1080x1080 real-footage edit
-        run: bash eu-render/render.sh
+        shell: bash
+        run: |
+          set +e
+          bash -x eu-render/render.sh 2>&1 | tee eu-render/render-debug.log
+          status=${PIPESTATUS[0]}
+          echo "$status" > eu-render/render-exit-code.txt
+          exit "$status"
 
-      - name: Upload rendered video
+      - name: Upload rendered video and diagnostics
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: eu-neutral-real-footage-video
@@ -32,5 +39,7 @@ jobs:
             eu-render/EU_REAL_FOOTAGE_NEUTRAL_VIDEO_ONLY.mp4
             eu-render/render_probe.json
             eu-render/SHA256SUMS.txt
-          if-no-files-found: error
+            eu-render/render-debug.log
+            eu-render/render-exit-code.txt
+          if-no-files-found: warn
           retention-days: 1
