@@ -21,28 +21,26 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ffmpeg
 
-      - name: Render V2 1080x1080 real-footage edit
+      - name: Render V4 1080x1080 real-footage background
         shell: bash
         run: |
-          mkdir -p eu-render-v2
+          mkdir -p eu-render-v4
           set +e
-          bash -x eu-render/render_v2.sh 2>&1 | tee eu-render-v2/render-debug.log
+          bash -x eu-render/render_v4_bg.sh 2>&1 | tee eu-render-v4/render-debug.log
           status=${PIPESTATUS[0]}
-          echo "$status" > eu-render-v2/render-exit-code.txt
+          echo "$status" > eu-render-v4/render-exit-code.txt
           exit "$status"
 
-      - name: Upload rendered V2, background, logo and diagnostics
+      - name: Upload V4 background and diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: eu-neutral-real-footage-video-v2
+          name: eu-v4-real-footage-background
           path: |
-            eu-render-v2/EU_EDIT_V2_VIDEO_ONLY.mp4
-            eu-render-v2/background.mp4
-            eu-render-v2/assets/fdp.png
-            eu-render-v2/render_probe.json
-            eu-render-v2/SHA256SUMS.txt
-            eu-render-v2/render-debug.log
-            eu-render-v2/render-exit-code.txt
+            eu-render-v4/background_v4.mp4
+            eu-render-v4/render_probe.json
+            eu-render-v4/SHA256SUMS.txt
+            eu-render-v4/render-debug.log
+            eu-render-v4/render-exit-code.txt
           if-no-files-found: warn
           retention-days: 1
